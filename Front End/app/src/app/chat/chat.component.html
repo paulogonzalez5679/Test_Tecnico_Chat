@@ -1,0 +1,198 @@
+<body>
+  <div class="container-fluid h-100 mt-5">
+    <div class="row justify-content-center h-100">
+
+      <div class="col-md-0 col-xl-1 order-lg-1"></div>
+      <!-- =======================left Body================================ -->
+      <div class="col-md-4 col-xl-2 chat order-last order-lg-2">
+        <div class="card mb-sm-3 mb-md-0 contacts_card">
+          <div class="card-header">
+            <h1 class="chat-list-title">All User</h1>
+          </div>
+          <div class="card-body contacts_body ">
+            <ul class="contacts chatList" *ngFor="let presentation of alluser">
+              <li *ngIf="presentation.userName != check">
+                <div class="d-flex bd-highlight">
+                  <div class="img_cont">
+                    <div class="rounded-circle user_img text_inside_circle">
+                      {{presentation.userName.substring(0,1)}}
+                    </div>
+
+                  </div>
+                  <div class="user_info" (click)="goToChat(presentation.userName)">
+                    <!-- {{chats.secondUserName}}  -->
+                    <div style="margin-top: 1rem;">
+                      {{presentation.userName}}</div>
+                    <br>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+
+      <div class="col-md-0 col-xl-1 order-lg-3"></div>
+
+      <!-- =============================Middle Body============================= -->
+      <div class="col-md-8 col-xl-5 chat order-md-1 order-lg-4">
+        <div class="card">
+
+
+          <div class="card-header msg_head">
+            <div class="d-flex bd-highlight">
+              <div class="img_cont">
+                <div class="rounded-circle user_img text_inside_circle1" *ngIf="secondUserName!=senderCheck">
+                  {{secondUserName?.substring(0,1)}}</div>
+                <div class="rounded-circle user_img text_inside_circle1" *ngIf="secondUserName==senderCheck">
+                  {{firstUserName?.substring(0,1)}}</div>
+              </div>
+              <div class="user_info">
+                <span *ngIf="secondUserName!=senderCheck">{{secondUserName}}</span>
+                <span *ngIf="secondUserName==senderCheck">{{firstUserName}}</span>
+                <p>Message</p>
+              </div>
+              <div class="video_cam">
+              </div>
+            </div>
+          </div>
+          <div class="card-body msg_card_body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+
+            <div *ngFor="let msg of messageList">
+
+              <div class="d-flex justify-content-end mb-4" *ngIf="msg.senderEmail==senderCheck">
+                <div class="msg_cotainer_send">
+                  <!-- {{msg.replymessage | json}} -->
+                  {{msg.replymessage}}
+                  <br>
+                  
+                  <!-- <span class="msg_time_send">{{msg.time.substring(11,16)}}</span> -->
+                </div>
+                <div class="img_cont_msg">
+                  <span
+                    class="rounded-circle user_img_msg text_inside_circle2">{{msg.senderEmail.substring(0,1)}}</span>
+                </div>
+                <button type="button" class="btn btn-primary" type="submit" data-toggle="modal"
+                data-target="#modalEdit" (click)="getId(msg.id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg></button>
+                <button type="button" class="btn btn-danger" (click)="deleteMsg(msg.id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                </svg></button>
+              </div>
+
+
+              <div class="d-flex justify-content-start mb-4" *ngIf="msg.senderEmail!=senderCheck">
+                <div class="img_cont_msg">
+                  <span
+                    class="rounded-circle user_img_msg text_inside_circle3">{{msg.senderEmail.substring(0,1)}}</span>
+                </div>
+                <div class="msg_cotainer">
+                  {{msg.replymessage}}
+                  <span class="msg_time">{{msg.time.substring(11,16)}}</span>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="card-footer">
+            <form [formGroup]="chatForm">
+              <div class="input-group">
+                <div class="input-group-append">
+                  <span class="input-group-text attach_btn"></span>
+                </div>
+                <textarea name="" class="form-control type_msg" placeholder="Type your message..."
+                  formControlName="replymessage" (keyup.enter)="sendMessage()"></textarea>
+                <div class="input-group-append">
+                  <button mat-raised-button class="input-group-text send_btn" (click)="sendMessage()">
+                    <i class="fa fa-location-arrow"></i> </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ========================Right Body========================= -->
+      <div class="col-md-4 col-xl-2 chat order-md-2 order-lg-5">
+        <div class="card mb-sm-3 mb-md-0 contacts_card">
+          <div class="card-header">
+            <h1 class="chat-list-title">Chat List</h1>
+          </div>
+          <div class="card-body contacts_body ">
+            <ul class="contacts chatList" *ngFor="let chats of chatList">
+              <li>
+                <div class="d-flex bd-highlight" (click)="loadChatByEmail(chats.secondUserName, chats.firstUserName)">
+                  <div class="img_cont">
+                    <div class="rounded-circle user_img text_inside_circle" *ngIf="chats.secondUserName!=senderCheck">
+                      {{chats.secondUserName.substring(0,1)}}
+                    </div>
+                    <div class="rounded-circle user_img text_inside_circle" *ngIf="chats.secondUserName==senderCheck">
+                      {{chats.firstUserName.substring(0,1)}}
+                    </div>
+
+                  </div>
+                  <div class="user_info">
+                    <div *ngIf="chats.secondUserName!=senderCheck" style="margin-top: 1rem;">
+                      {{chats.secondUserName}}</div>
+                    <div *ngIf="chats.secondUserName==senderCheck" style="margin-top: 1rem;">
+                      {{chats.firstUserName}}</div>
+                    <br>
+                  </div>
+
+                </div>
+                <div class="row" >
+                  <div class="col-4">
+
+                  </div>
+                  <div class="col-4">
+                    <button type="button" class="btn btn-danger"  (click)="deleteChat(chats.chatId)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                    </svg></button>
+                   
+                    
+                  </div>
+                  <div class="col-4">
+
+                  </div>
+
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+
+      <div class="col-md-0 col-xl-1 order-lg-6"></div>
+    </div>
+  </div>
+</body>
+
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalEditTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditTitle">Enter Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- ========================= -->
+        <input  [(ngModel)]="message">
+        <br>
+        <button type="button" class="btn btn-primary" (click)="editMsg()"> Editar</button>
+        <!-- ========================= -->
+      </div>
+    </div>
+  </div>
+</div>

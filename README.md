@@ -6,7 +6,7 @@ Pasos para ejecutar la aplicación
 ### Para el back backend
 - Paso 1: agregue el servicio de chat al espacio de trabajo usando intellij.
 - Paso 2: Verificar en application.properties que apunte a la base "chatpg".
-- Paso 3: Creear la base "chatpg", los QUERYS se encuentran en la carperta "Base de Datos".
+- Paso 3: Creear la base "chatpg", los QUERYS se encuentran en la carperta "Base de Datos", caso contrario esta configurado para crear una base de datos desde cero con el nombre "chatpg".
 - Paso 4: Ejecute el backend.                                                   
                                                                               
 ### En el frontend       
