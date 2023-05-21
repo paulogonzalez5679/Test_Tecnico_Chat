@@ -3,7 +3,7 @@ Full frontend and backend ( Angular , Spring Boot and MySQL )
 
 Pasos para ejecutar la aplicación
 =============================
-Para el back backend
+- Para el back backend
 Paso 1: agregue el servicio de chat al espacio de trabajo usando intellij.
 Paso 2: Verificar en application.properties que apunte a la base "chatpg".
 Paso 3: Creear la base "chatpg", los QUERYS se encuentran en la carperta "Base de Datos".
